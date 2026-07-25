@@ -11,6 +11,11 @@ time, page title, and cache status — in seconds.
 
 </div>
 
+## 🚀 Live Demo
+
+- **Frontend:** https://page-pulse-analyzer.netlify.app/
+- **Backend API:** https://page-pulse-api-production.up.railway.app/
+
 ---
 
 ## Overview
@@ -24,7 +29,7 @@ and returns a structured JSON envelope keyed by a request ID.
 ```
 ┌────────────┐     POST /api/audit      ┌─────────────┐     fetch(5s)    ┌──────────┐
 │  Frontend  │  ─────────────────────►  │   Backend   │  ─────────────►  │  Target  │
-│  (Vercel)  │  ◄──── 200 {data} ────   │  (Render)   │  ◄── response ── │  Website │
+│  (Netlify)  │  ◄──── 200 {data} ────   │  (Railway)   │  ◄── response ── │  Website │
 └────────────┘                          └─────────────┘                  └──────────┘
                                               │
                                    ┌──────────┼──────────┐
@@ -82,7 +87,7 @@ node-cache, uuid, zod, Helmet, CORS, compression.
 
 **CI/CD:** GitHub Actions (backend + frontend jobs).
 
-**Deployment:** Vercel (frontend) · Render (backend).
+**Deployment:** Netlify (frontend) · Railway (backend).
 
 ---
 
@@ -128,8 +133,6 @@ page-pulse/
 │   ├── App.tsx                # Routing + layout + error boundary
 │   └── main.tsx
 ├── index.html
-├── vercel.json
-├── render.yaml
 ├── AI_USAGE.md
 └── README.md
 ```
@@ -262,20 +265,48 @@ npm test            # Jest + Supertest, with coverage
 
 ## Deployment
 
-### Frontend → Vercel
+### Frontend → Netlify
 
-1. Import the repo in Vercel. Framework: Vite. Root: repo root.
-2. Set `VITE_API_URL` to your Render backend URL.
-3. Deploy. `vercel.json` handles the SPA rewrite.
+1. Import the repository into Netlify.
+2. Set the build configuration:
 
-### Backend → Render
+   ```text
+   Build command: npm run build
+   Publish directory: dist
+   ```
 
-1. **New → Blueprint**, select the repo. `render.yaml` provisions the
-   service.
-2. Set `CORS_ORIGIN` to your Vercel URL.
-3. Deploy. Health check: `/api/health`.
+3. Add the environment variable:
 
-See [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) for the full guide.
+   ```text
+   VITE_API_URL=https://page-pulse-api-production.up.railway.app
+   ```
+
+4. Deploy the site. If using React Router, configure a SPA redirect using `netlify.toml` (or Netlify's redirect settings).
+
+### Backend → Railway
+
+1. Create a new project in Railway and connect your GitHub repository.
+2. Set the **Root Directory** to:
+
+   ```text
+   server
+   ```
+
+3. Railway will build and deploy the backend automatically.
+4. Set the following environment variables:
+
+   ```text
+   NODE_ENV=production
+   CORS_ORIGIN=https://page-pulse-analyzer.netlify.app
+   ```
+
+5. Verify the deployment using:
+
+   ```text
+   https://page-pulse-api-production.up.railway.app/api/health
+   ```
+
+See [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) for the full deployment guide.
 
 ---
 
@@ -340,9 +371,3 @@ refinement, testing, debugging, and design decisions were reviewed and
 customized by the developer.
 
 ---
-
-<div align="center">
-
-**Built for [Digital Heroes Training Task](https://digitalheroesco.com)**
-
-</div>
