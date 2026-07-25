@@ -1,96 +1,118 @@
 # Production Deployment Guide
 
-End-to-end guide to run Page Pulse in production on **Render** (backend) +
-**Vercel** (frontend).
+End-to-end guide to deploy **Page Pulse** in production using **Railway** (backend) and **Netlify** (frontend).
 
 ## Prerequisites
 
-- A GitHub repo containing this project.
-- Accounts on [Render](https://render.com) and [Vercel](https://vercel.com).
-- Node 20+ locally for verification.
+- GitHub repository containing this project
+- Railway account
+- Netlify account
+- Node.js 20+ (optional, for local verification)
 
-## 1. Deploy the backend (Render)
+---
 
-### Option A — Blueprint (recommended)
+## 1. Deploy the Backend (Railway)
 
-1. Push the repo to GitHub.
-2. In Render, **New → Blueprint**, select the repo.
-3. Render reads `render.yaml` and provisions `page-pulse-api`.
-4. Set `CORS_ORIGIN` (initially your Vercel URL or `*` for testing).
-5. Deploy. Smoke test:
-   ```bash
-   curl https://<your-api>.onrender.com/api/health
-   # → {"success":true,"data":{"status":"ok",...}}
+1. Create a new project in Railway.
+2. Connect your GitHub repository.
+3. Set the **Root Directory** to:
+
+   ```text
+   server
    ```
 
-### Option B — manual web service
+4. Railway will automatically detect the project and deploy it.
+5. Add the following environment variables:
 
-1. **New → Web Service**, connect the repo.
-2. **Root Directory:** `server`
-3. **Build:** `npm install && npm run build`
-4. **Start:** `npm start`
-5. **Health Check Path:** `/api/health`
-6. Add the env vars from `server/.env.example`.
+   ```text
+   NODE_ENV=production
+   CORS_ORIGIN=https://page-pulse-analyzer.netlify.app
+   ```
 
-## 2. Deploy the frontend (Vercel)
+6. Verify the deployment:
 
-1. In Vercel, **New Project**, import the repo.
-2. Framework preset: **Vite**. Root directory: the repo root (not `server`).
-3. Build command + output are auto-detected from `vercel.json` (`npm run build` → `dist`).
+   ```bash
+   curl https://page-pulse-api-production.up.railway.app/api/health
+   ```
+
+---
+
+## 2. Deploy the Frontend (Netlify)
+
+1. Create a new site in Netlify.
+2. Import your GitHub repository.
+3. Configure:
+
+   ```text
+   Build Command: npm run build
+   Publish Directory: dist
+   ```
+
 4. Add the environment variable:
-   - `VITE_API_URL` = `https://<your-api>.onrender.com` (no trailing slash)
-5. Deploy. Open the preview URL and run one audit to confirm end-to-end.
 
-## 3. Lock down CORS
+   ```text
+   VITE_API_URL=https://page-pulse-api-production.up.railway.app
+   ```
 
-Back on Render, set `CORS_ORIGIN` to your exact Vercel URL(s):
-```
-CORS_ORIGIN=https://page-pulse.vercel.app,https://page-pulse-git-main-<user>.vercel.app
-```
-Redeploy the backend. Verify a request from the deployed frontend still
-succeeds (no CORS error in the browser console).
+5. Deploy the project.
 
-## 4. CI
+---
 
-`.github/workflows/ci.yml` runs on every push/PR:
-- Backend job: `npm ci` → `lint` → `test` → `build` (uploads coverage).
-- Frontend job: `npm ci` → `lint` → `typecheck` → `build` (uploads `dist`).
+## 3. Verify Deployment
 
-Both jobs must be green before merging to your deploy branch.
+- Backend Health API returns **200**
+- Frontend successfully communicates with the backend
+- No CORS errors in the browser console
 
-## 5. Local verification
+---
+
+## 4. GitHub Actions
+
+`.github/workflows/ci.yml` runs on every push and pull request:
+
+- Backend: lint → test → build
+- Frontend: lint → typecheck → build
+
+---
+
+## 5. Local Verification
 
 ```bash
 # Backend
 cd server
 cp .env.example .env
-npm install && npm run dev      # http://localhost:4000
-
-# Frontend (repo root, new terminal)
 npm install
-VITE_API_URL=http://localhost:4000 npm run dev   # http://localhost:5173
+npm run dev
+
+# Frontend
+npm install
+VITE_API_URL=http://localhost:4000 npm run dev
 ```
 
-## 6. Post-deploy checks
+---
 
-- [ ] `GET /api/health` returns 200.
-- [ ] `POST /api/audit { "url":"https://openai.com" }` returns a 200 envelope.
-- [ ] A second identical POST returns `cached:true`.
-- [ ] The frontend's footer links to `https://digitalheroesco.com`.
-- [ ] Dark mode toggle persists across reload.
-- [ ] A 404 path renders the NotFound page.
+## 6. Post Deployment Checklist
 
-## Environment variable reference
+- [ ] `/api/health` returns HTTP 200
+- [ ] Website audit works correctly
+- [ ] Repeated requests return cached results
+- [ ] Dark mode persists
+- [ ] React Router routes work after refresh
+- [ ] No browser console errors
 
-| Var | Where | Default | Purpose |
-| --- | --- | --- | --- |
-| `PORT` | server | 4000 | Listen port |
-| `NODE_ENV` | server | development | Runtime mode |
-| `CORS_ORIGIN` | server | `*` | Allowed frontend origins |
-| `AUDIT_TIMEOUT_MS` | server | 5000 | Per-probe abort timeout |
-| `MAX_CONCURRENT_AUDITS` | server | 10 | Concurrency cap |
-| `CACHE_TTL_SECONDS` | server | 600 | Result cache TTL |
-| `HISTORY_LIMIT` | server | 20 | In-memory history size |
-| `RATE_LIMIT_WINDOW_MS` | server | 3600000 | Rate-limit window |
-| `RATE_LIMIT_MAX` | server | 100 | Max requests per window per IP |
-| `VITE_API_URL` | client | (empty) | Backend base URL; empty = fallback engine |
+---
+
+## Environment Variables
+
+| Variable | Location | Purpose |
+|-----------|----------|---------|
+| PORT | Server | Server port |
+| NODE_ENV | Server | Runtime environment |
+| CORS_ORIGIN | Server | Allowed frontend origin |
+| AUDIT_TIMEOUT_MS | Server | Request timeout |
+| MAX_CONCURRENT_AUDITS | Server | Maximum concurrent audits |
+| CACHE_TTL_SECONDS | Server | Cache duration |
+| HISTORY_LIMIT | Server | History limit |
+| RATE_LIMIT_WINDOW_MS | Server | Rate-limit window |
+| RATE_LIMIT_MAX | Server | Maximum requests |
+| VITE_API_URL | Client | Railway backend URL |
