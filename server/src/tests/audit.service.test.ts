@@ -59,7 +59,6 @@ describe('audit.service — auditWebsite', () => {
   it(
     'throws a TimeoutError when the request exceeds the timeout',
     async () => {
-      // Slow response exceeds the 5s audit timeout.
       mockFetchSlow(10000);
       await expect(auditWebsite('https://slow.example', 'req-6', '127.0.0.1')).rejects.toThrow(
         /timed out/i
@@ -84,7 +83,6 @@ describe('audit.service — auditWebsite', () => {
     await auditWebsite('https://h1.example', 'req-9', '127.0.0.1');
     await auditWebsite('https://h2.example', 'req-10', '127.0.0.1');
     expect(historyStore.list().length).toBe(2);
-    // Most-recent-first ordering.
     expect(historyStore.list()[0].url).toBe('https://h2.example');
   });
 });

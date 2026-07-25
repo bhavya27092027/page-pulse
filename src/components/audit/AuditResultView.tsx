@@ -9,7 +9,6 @@ import {
 } from '@/utils/audit';
 import { cn } from '@/lib/utils';
 
-/** Compact metric tile used inside the result grid. */
 interface MetricCardProps {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
@@ -51,7 +50,6 @@ export function MetricCard({ icon: Icon, label, value, badge, tone = 'default', 
   );
 }
 
-/** The full audit result block: header + 6-tile metric grid + meta row. */
 interface AuditResultViewProps {
   result: AuditResult;
 }

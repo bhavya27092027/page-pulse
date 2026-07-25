@@ -1,11 +1,6 @@
 import winston from 'winston';
 import { env, isProd } from '../config/env.js';
 
-/**
- * Structured logger (Winston). JSON in production, colorized console
- * in development. Every log line carries a timestamp + level; request
- * logs additionally carry requestId, url, status, duration, ip.
- */
 const baseFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
   winston.format.errors({ stack: true }),
@@ -38,7 +33,6 @@ export const logger = winston.createLogger({
   ],
 });
 
-/** Convenience helper for request-scoped log lines. */
 export function logAudit(opts: {
   requestId: string;
   url: string;

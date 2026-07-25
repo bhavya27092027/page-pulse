@@ -1,16 +1,5 @@
 import type { AuditResult } from '@/types/audit';
 
-/**
- * In-browser audit engine — a resilience fallback used when no backend is
- * configured (e.g. static Vercel preview without API wiring) or the backend
- * is unreachable. Produces the exact same AuditResult shape as the server.
- *
- * Constraints:
- *  - CORS limits which sites expose headers/title; we degrade gracefully.
- *  - No caching/concurrency control here — those are server concerns.
- *  - `cached` is always false; `requestId` is prefixed `client-` so logs
- *    and the UI can distinguish server- vs client-sourced results.
- */
 export async function fetchAuditFallback(
   url: string,
   signal?: AbortSignal,
@@ -38,7 +27,6 @@ export async function fetchAuditFallback(
       signal.addEventListener('abort', () => controller.abort(), { once: true });
     }
 
-    // no-cors lets us confirm reachability even when headers are opaque.
     const res = await fetch(url, {
       method: 'GET',
       mode: 'no-cors',
@@ -49,8 +37,6 @@ export async function fetchAuditFallback(
 
     const responseTime = Math.round(performance.now() - startedAt);
 
-    // With mode: 'no-cors', `res.type` is 'opaque' and status is 0 even on
-    // success. Treat a non-thrown fetch as reachable.
     const reachable = res.type === 'opaque' ? true : res.ok;
     const status = res.type === 'opaque' ? 0 : res.status;
 
@@ -61,7 +47,7 @@ export async function fetchAuditFallback(
         const match = text.match(/<title[^>]*>([^<]+)<\/title>/i);
         if (match?.[1]) title = decodeHtmlEntities(match[1].trim());
       } catch {
-        /* title is best-effort */
+        // Ignore title extraction errors.
       }
     }
 
@@ -72,12 +58,11 @@ export async function fetchAuditFallback(
       responseTime,
       title,
     };
-  } catch (err) {
+  } catch {
     if (isDegraded) {
-      // Backend was down — surface that context rather than a bare "unreachable".
       throw new Error(
         'Backend unreachable and target site blocks cross-origin reads. ' +
-          'Try a different URL or check the backend status.'
+        'Try a different URL or check the backend status.'
       );
     }
     const responseTime = Math.round(performance.now() - startedAt);

@@ -1,21 +1,15 @@
 import { useEffect } from 'react';
 
 export interface ShortcutBinding {
-  /** Lowercase key, e.g. "k". Use "Enter", "Escape" for special keys. */
   key: string;
   ctrl?: boolean;
   meta?: boolean;
   shift?: boolean;
   alt?: boolean;
   handler: () => void;
-  /** Skip when focus is in a form field (default: true). */
   allowInInput?: boolean;
 }
 
-/**
- * Global keyboard shortcut binder. Register an array of bindings; the hook
- * cleans up on unmount. Matches on key + modifier flags, case-insensitive.
- */
 export function useKeyboardShortcuts(bindings: ShortcutBinding[]) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {

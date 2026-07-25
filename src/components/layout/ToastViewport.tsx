@@ -15,7 +15,6 @@ const TONES = {
   info: 'border-primary/30 bg-primary/10 text-primary',
 } as const;
 
-/** Single toast viewport rendered near the app root. */
 export function ToastViewport() {
   const { toasts, remove } = useToasts();
 

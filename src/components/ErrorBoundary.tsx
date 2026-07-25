@@ -9,7 +9,6 @@ interface State {
   message?: string;
 }
 
-/** Top-level error boundary so a render fault never blanks the whole app. */
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false };
 

@@ -1,7 +1,3 @@
-/**
- * Typed application errors. The central error handler maps these to
- * the right HTTP status + message; unknown errors become 500s.
- */
 export class AppError extends Error {
   statusCode: number;
   constructor(message: string, statusCode = 500) {

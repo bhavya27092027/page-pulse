@@ -7,19 +7,19 @@ on:
     branches: [main, master]
 
 jobs:
-  # ---------- Backend: install, lint, test, build ----------
   backend:
-    name: Backend (lint · test · build)
+    name: Backend (Lint · Test · Build)
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: server
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -31,7 +31,6 @@ jobs:
 
       - name: Lint
         run: npm run lint
-        continue-on-error: true
 
       - name: Run tests
         run: npm test
@@ -41,24 +40,24 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload coverage
+      - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: backend-coverage
-          path: server/coverage/
+          path: server/coverage
+          if-no-files-found: ignore
           retention-days: 7
 
-  # ---------- Frontend: install, lint, typecheck, build ----------
   frontend:
-    name: Frontend (lint · typecheck · build)
+    name: Frontend (Lint · Typecheck · Build)
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -70,17 +69,17 @@ jobs:
 
       - name: Lint
         run: npm run lint
-        continue-on-error: true
 
-      - name: Typecheck
+      - name: Type Check
         run: npm run typecheck
 
       - name: Build
         run: npm run build
 
-      - name: Upload build artifact
+      - name: Upload frontend build
         uses: actions/upload-artifact@v4
         with:
           name: frontend-dist
-          path: dist/
+          path: dist
+          if-no-files-found: error
           retention-days: 3

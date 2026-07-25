@@ -13,11 +13,6 @@ interface AuditState {
 
 const initialState: AuditState = { loading: false, result: null, error: null };
 
-/**
- * Orchestrates a single audit lifecycle: validate → request → persist to
- * history → surface toast. Owns an AbortController so a new submission
- * cancels an in-flight one, preventing race conditions in the UI.
- */
 export function useAudit() {
   const [state, setState] = useState<AuditState>(initialState);
   const { history, add, clear } = useHistory();

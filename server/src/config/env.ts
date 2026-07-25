@@ -1,11 +1,6 @@
 import 'dotenv/config';
 import { z } from 'zod';
 
-/**
- * Centralized, validated runtime configuration.
- * All env vars are parsed once at boot and exposed as typed constants.
- * Invalid config throws — fail fast rather than running with bad defaults.
- */
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().int().positive().default(4000),
@@ -23,14 +18,12 @@ const envSchema = z.object({
 const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
-  // eslint-disable-next-line no-console
   console.error('Invalid environment configuration:', parsed.error.format());
   process.exit(1);
 }
 
 export const env = parsed.data;
 
-/** Normalized list of allowed CORS origins. */
 export const corsOrigins: string[] =
   env.CORS_ORIGIN === '*' ? ['*'] : env.CORS_ORIGIN.split(',').map((s) => s.trim()).filter(Boolean);
 

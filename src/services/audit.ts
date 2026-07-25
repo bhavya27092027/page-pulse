@@ -13,18 +13,6 @@ export interface AuditOptions {
   signal?: AbortSignal;
 }
 
-/**
- * Run a website audit.
- *
- * Production path: POST /api/audit on the Express backend (caching, rate
- * limiting, concurrency control, structured logging all server-side).
- *
- * Resilience path: if no VITE_API_URL is configured OR the backend is
- * unreachable, a CORS-safe in-browser audit engine produces the same result
- * shape so the dashboard is never a dead end. This is intentionally a
- * graceful degradation, not a silent override — `cached` is always `false`
- * and `requestId` is prefixed `client-` when the fallback is used.
- */
 export async function auditUrl(url: string, opts: AuditOptions = {}): Promise<AuditResult> {
   if (!config.apiUrl) {
     return fetchAuditFallback(url, opts.signal);
@@ -48,7 +36,6 @@ export async function auditUrl(url: string, opts: AuditOptions = {}): Promise<Au
       );
     }
 
-    // Network / timeout / CORS — degrade to client engine instead of dead-ending.
     return fetchAuditFallback(url, opts.signal, true);
   }
 }

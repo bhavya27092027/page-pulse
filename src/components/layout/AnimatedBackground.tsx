@@ -1,10 +1,5 @@
 import { memo } from 'react';
 
-/**
- * Layered animated background: aurora blobs + grid + radial mask.
- * Purely decorative — pointer-events:none, aria-hidden, and paused for
- * users with reduced-motion (handled in CSS via prefers-reduced-motion).
- */
 function AnimatedBackgroundImpl() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">

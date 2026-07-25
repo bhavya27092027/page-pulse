@@ -2,11 +2,6 @@ import { createApp } from './app.js';
 import { env } from './config/env.js';
 import { logger } from './utils/logger.js';
 
-/**
- * Server entrypoint. Builds the app and binds the configured port.
- * Exported separately from app.ts so tests can import createApp()
- * without starting a listener.
- */
 const app = createApp();
 
 const server = app.listen(env.PORT, () => {
@@ -18,14 +13,13 @@ const server = app.listen(env.PORT, () => {
   });
 });
 
-// Graceful shutdown — stop accepting new connections, then exit.
 function shutdown(signal: string) {
   logger.info('server.shutting_down', { signal });
   server.close(() => {
     logger.info('server.closed');
     process.exit(0);
   });
-  // Hard exit if something hangs.
+
   setTimeout(() => process.exit(1), 10000).unref();
 }
 

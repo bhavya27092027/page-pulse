@@ -10,7 +10,6 @@ interface HistoryPanelProps {
   onClear: () => void;
 }
 
-/** Recent-audit list (last 20). Each row re-runs an audit on click. */
 export function HistoryPanel({ history, onReaudit, onClear }: HistoryPanelProps) {
   return (
     <div className="rounded-3xl glass p-5 sm:p-6">

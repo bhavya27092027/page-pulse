@@ -1,8 +1,3 @@
-/**
- * Shared domain types for Page Pulse.
- * These mirror the backend API contract (server/src/types).
- */
-
 export interface AuditRequest {
   url: string;
 }
@@ -27,7 +22,6 @@ export interface ApiResponse<T> {
 
 export type AuditResponse = ApiResponse<AuditResult>;
 
-/** Severity bucket derived from an HTTP status code. */
 export type StatusKind = 'success' | 'redirect' | 'client-error' | 'server-error' | 'unreachable' | 'unknown';
 
 export interface HistoryEntry extends AuditResult {

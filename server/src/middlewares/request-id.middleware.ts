@@ -1,13 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { generateRequestId } from '../utils/request-id.js';
 
-/**
- * Attach a fresh request ID to every incoming request. Prefers a client-
- * supplied `X-Request-Id` header (if present) so upstream services can
- * propagate correlation; otherwise generates a UUIDv4.
- *
- * Exposes the id on `req.requestId` and as the `X-Request-Id` response header.
- */
 declare module 'express-serve-static-core' {
   interface Request {
     requestId: string;

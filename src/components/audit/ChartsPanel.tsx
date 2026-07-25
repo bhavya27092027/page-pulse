@@ -19,7 +19,6 @@ interface ChartsPanelProps {
   history: HistoryEntry[];
 }
 
-/** Dashboard charts: response-time trend + status distribution. */
 export function ChartsPanel({ history }: ChartsPanelProps) {
   const trendData = useMemo(
     () =>

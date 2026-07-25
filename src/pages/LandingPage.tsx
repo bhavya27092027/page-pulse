@@ -17,7 +17,7 @@ interface LandingPageProps {
   onToggleTheme: () => void;
 }
 
-export function LandingPage({ theme, onToggleTheme }: LandingPageProps) {
+export function LandingPage({  onToggleTheme }: LandingPageProps) {
   const {
     loading,
     result,

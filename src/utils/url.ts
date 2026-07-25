@@ -1,8 +1,3 @@
-/**
- * URL validation + normalization used by the form and the audit service.
- * Mirrors the backend's zod schema (server/src/utils/validation.ts) so the
- * client rejects bad input before making a network round-trip.
- */
 export interface NormalizedUrl {
   url: string;
   host: string;

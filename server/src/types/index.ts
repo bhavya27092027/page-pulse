@@ -1,9 +1,5 @@
 import { z } from 'zod';
 
-/**
- * Request/response domain types — the API contract.
- * The frontend (src/types/audit.ts) mirrors these shapes.
- */
 export const auditRequestSchema = z.object({
   url: z
     .string()

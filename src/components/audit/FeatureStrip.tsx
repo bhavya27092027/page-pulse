@@ -10,7 +10,6 @@ const FEATURES = [
   { icon: FileJson, title: 'Structured logs', desc: 'Request ID, IP, status, duration on every call.' },
 ];
 
-/** Compact feature strip beneath the hero form. */
 export function FeatureStrip() {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">

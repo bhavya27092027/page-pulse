@@ -12,7 +12,6 @@ interface HeaderProps {
   onToggleTheme: () => void;
 }
 
-/** Top app bar: brand mark, keyboard-shortcuts hint, theme toggle. */
 export function Header({ theme, onToggleTheme }: HeaderProps) {
   return (
     <motion.header

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ShieldCheck } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
-/** Hero headline block above the audit form. */
 export function Hero() {
   return (
     <section className="relative pt-8 sm:pt-12">
@@ -13,10 +12,7 @@ export function Hero() {
       >
         <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-3.5 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur">
           <Sparkles className="h-3.5 w-3.5 text-primary" />
-          <span>Production-grade website audit platform</span>
-          <span className="ml-1 h-3 w-px bg-border" />
-          <ShieldCheck className="h-3.5 w-3.5 text-success" />
-          <span className="text-success">SDE assessment</span>
+          <span>Production-grade Website Audit Platform</span>
         </div>
 
         <h1 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">

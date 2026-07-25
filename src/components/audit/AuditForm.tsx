@@ -11,10 +11,6 @@ interface AuditFormProps {
   initialUrl?: string;
 }
 
-/**
- * Hero search form. Validates locally first (instant feedback), then
- * delegates to the parent's onSubmit with a normalized URL.
- */
 export const AuditForm = forwardRef<HTMLInputElement, AuditFormProps>(
   ({ onSubmit, loading, initialUrl = '' }, ref) => {
     const [value, setValue] = useState(initialUrl);

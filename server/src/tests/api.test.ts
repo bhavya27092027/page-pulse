@@ -9,7 +9,6 @@ import { mockFetch, mockFetchReject, mockFetchSlow, clearFetchMock } from './hel
 let app: Express;
 
 beforeEach(() => {
-  // Fresh app per test so rate-limit counters don't bleed across cases.
   app = createApp();
   clearCache();
   historyStore.clear();
@@ -52,7 +51,10 @@ describe('POST /api/audit — success path', () => {
 
 describe('POST /api/audit — validation failures', () => {
   it('rejects an invalid URL with 400 and a structured error', async () => {
-    const res = await request(app).post('/api/audit').send({ url: 'not a url' });
+    const res = await request(app)
+      .post('/api/audit')
+      .send({ url: 'not a url' });
+
     expect(res.status).toBe(400);
     expect(res.body.success).toBe(false);
     expect(res.body.error).toBeTruthy();
@@ -92,7 +94,7 @@ describe('POST /api/audit — failure paths', () => {
   it(
     'returns a 504 on timeout',
     async () => {
-      mockFetchSlow(10000); // exceeds the 5s audit timeout
+      mockFetchSlow(10000);
       const res = await request(app).post('/api/audit').send({ url: 'https://slow.example' });
       expect(res.status).toBe(504);
       expect(res.body.success).toBe(false);
@@ -102,7 +104,6 @@ describe('POST /api/audit — failure paths', () => {
   );
 
   it('returns a 200 with reachable=false on a network failure', async () => {
-    // DNS/connection errors are NOT 502 — the audit ran, the site is just down.
     mockFetchReject(new Error('ENOTFOUND'));
     const res = await request(app).post('/api/audit').send({ url: 'https://nope.invalid' });
     expect(res.status).toBe(200);
@@ -113,7 +114,6 @@ describe('POST /api/audit — failure paths', () => {
 
 describe('POST /api/audit — rate limiting', () => {
   it('returns 429 after exceeding the configured limit', async () => {
-    // Limit is 100/window in test env (default). Fire 101 fast requests.
     mockFetch({ status: 200, title: 'Limited' });
     let limited = false;
     for (let i = 0; i < 105; i++) {

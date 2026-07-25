@@ -12,7 +12,6 @@ const EXAMPLES = [
   { label: 'Stripe', url: 'https://stripe.com' },
 ];
 
-/** Illustrated empty state shown before the first audit runs. */
 export function EmptyState({ onPickExample }: EmptyStateProps) {
   return (
     <motion.div

@@ -1,11 +1,6 @@
 import { env } from '../config/env.js';
 import type { AuditResult } from '../types/index.js';
 
-/**
- * In-memory ring buffer of the most recent audits (default: last 20).
- * Not persisted — this is a view into recent activity, not a store of
- * record. The frontend mirrors its own localStorage history client-side.
- */
 class HistoryStore {
   private entries: AuditResult[] = [];
 

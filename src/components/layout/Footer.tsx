@@ -1,9 +1,5 @@
 import { Activity, Github, Heart } from 'lucide-react';
 
-/**
- * App footer. The attribution line is a hard requirement:
- * "Built for Digital Heroes Training Task" linking to digitalheroesco.com.
- */
 export function Footer() {
   return (
     <footer className="relative z-10 mt-20 border-t border-border/60">
@@ -21,28 +17,24 @@ export function Footer() {
 
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-end">
             <a
-              href="https://github.com"
+              href="https://github.com/bhavya27092027/page-pulse"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <Github className="h-4 w-4" />
-              <span>Source</span>
+              <span>GitHub Repository</span>
             </a>
-            <a
-              href="https://digitalheroesco.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/40 px-3.5 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
-            >
-              <Heart className="h-3.5 w-3.5 text-accent" />
-              <span>Built for Digital Heroes Training Task</span>
-            </a>
+
+            <span className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/40 px-3.5 py-1.5 text-sm font-medium text-foreground">
+              <Heart className="h-3.5 w-3.5 text-red-500" />
+              <span>Built with React, Node.js, TypeScript & ❤️</span>
+            </span>
           </div>
         </div>
 
         <p className="mt-8 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Page Pulse. Crafted with care for a production SDE assessment.
+          &copy; {new Date().getFullYear()} Page Pulse. Production-ready Website Audit Platform.
         </p>
       </div>
     </footer>

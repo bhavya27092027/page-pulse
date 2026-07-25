@@ -10,7 +10,6 @@ interface ResultActionsProps {
   result: AuditResult;
 }
 
-/** Copy-JSON + download-report buttons for a finished audit. */
 export function ResultActions({ result }: ResultActionsProps) {
   const [copied, setCopied] = useState(false);
 

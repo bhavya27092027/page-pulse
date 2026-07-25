@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Home, Compass } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-/** Animated 404 page. */
 export function NotFoundPage() {
   return (
     <main className="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">

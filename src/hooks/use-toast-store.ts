@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { ToastMessage } from '@/types/audit';
 
-/**
- * Lightweight global toast store — a tiny event-emitter singleton so any
- * component can fire a toast without prop-drilling or context ceremony.
- * Rendered once by <ToastViewport /> near the app root.
- */
 type Listener = (toasts: ToastMessage[]) => void;
 
 const listeners = new Set<Listener>();

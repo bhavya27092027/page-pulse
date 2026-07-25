@@ -15,10 +15,6 @@ function load(): HistoryEntry[] {
   }
 }
 
-/**
- * Recent-audit history persisted to localStorage. Mirrors the server's
- * in-memory ring buffer (last 20) but survives reloads on the client.
- */
 export function useHistory() {
   const [history, setHistory] = useState<HistoryEntry[]>(load);
 
@@ -26,7 +22,7 @@ export function useHistory() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
     } catch {
-      /* quota / private mode — ignore */
+      // Ignore storage errors (e.g. private browsing or quota exceeded).
     }
   }, [history]);
 

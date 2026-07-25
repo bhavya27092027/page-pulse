@@ -1,9 +1,5 @@
 import type { StatusKind } from '@/types/audit';
 
-/**
- * Bucket an HTTP status code into a semantic severity kind.
- * Used to pick colors, icons, and labels across the dashboard.
- */
 export function classifyStatus(status: number | null): StatusKind {
   if (status === null) return 'unreachable';
   if (status >= 200 && status < 300) return 'success';
@@ -21,7 +17,6 @@ interface StatusMeta {
   bgClass: string;
 }
 
-/** Human-readable label + color tokens for a status kind. */
 export function statusMeta(status: number | null): StatusMeta {
   const kind = classifyStatus(status);
   switch (kind) {
@@ -76,7 +71,6 @@ export function statusMeta(status: number | null): StatusMeta {
   }
 }
 
-/** Performance band for response time, used for chart coloring + copy. */
 export function responseTimeBand(ms: number | null): {
   label: string;
   tone: 'success' | 'warning' | 'destructive' | 'muted';
@@ -87,7 +81,6 @@ export function responseTimeBand(ms: number | null): {
   return { label: 'Slow', tone: 'destructive' };
 }
 
-/** Format an ISO timestamp into a friendly relative + absolute string. */
 export function formatTimestamp(iso: string): {
   relative: string;
   absolute: string;
@@ -116,7 +109,6 @@ export function formatTimestamp(iso: string): {
   return { relative, absolute };
 }
 
-/** Extract a readable host from a URL for compact display. */
 export function prettyHost(url: string): string {
   try {
     const u = new URL(url);
@@ -126,7 +118,6 @@ export function prettyHost(url: string): string {
   }
 }
 
-/** Copy text to clipboard with a legacy fallback. */
 export async function copyToClipboard(text: string): Promise<boolean> {
   try {
     if (navigator?.clipboard?.writeText) {
@@ -134,7 +125,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
       return true;
     }
   } catch {
-    /* fall through to legacy */
+    // Ignore and fall back to document.execCommand().
   }
   try {
     const el = document.createElement('textarea');
@@ -151,7 +142,6 @@ export async function copyToClipboard(text: string): Promise<boolean> {
   }
 }
 
-/** Trigger a client-side JSON file download. */
 export function downloadJson(filename: string, data: unknown): void {
   const json = JSON.stringify(data, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
@@ -165,7 +155,6 @@ export function downloadJson(filename: string, data: unknown): void {
   URL.revokeObjectURL(url);
 }
 
-/** Build a slug-safe filename from a URL. */
 export function auditFilename(url: string): string {
   try {
     const u = new URL(url);
