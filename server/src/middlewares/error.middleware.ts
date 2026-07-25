@@ -5,6 +5,7 @@ import type { AuditErrorPayload } from '../types/index.js';
 
 export function errorHandler(err: unknown, req: Request, res: Response,
   _next: NextFunction): void {
+  void _next;
   const requestId = req.requestId ?? (res.getHeader('X-Request-Id') as string) ?? 'unknown';
 
   if (err instanceof AppError) {
