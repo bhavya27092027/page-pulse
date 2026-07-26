@@ -1,212 +1,446 @@
 <div align="center">
 
-# Page Pulse
+# 🚀 Page Pulse
 
-### Production-grade Website Audit Platform
+### Production-Grade Website Audit Platform
 
-Enter any website URL. Get back its HTTP status, reachability, response
-time, page title, and cache status — in seconds.
+Real-time website health monitoring with intelligent auditing, caching, concurrency control, structured logging, rate limiting, and production-ready engineering practices.
 
-[React] · [Vite] · [TypeScript] · [Tailwind] · [Express] · [Node 20] · [Jest]
+<p>
+
+<a href="https://page-pulse-analyzer.netlify.app">
+<img src="https://img.shields.io/badge/Live_Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
+</a>
+
+<a href="https://page-pulse-api-production.up.railway.app/api/health">
+<img src="https://img.shields.io/badge/API-Railway-7B3FE4?style=for-the-badge&logo=railway&logoColor=white"/>
+</a>
+
+<a href="https://github.com/bhavya27092027/page-pulse">
+<img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github"/>
+</a>
+
+</p>
+
+<p>
+
+<img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react"/>
+
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Node.js-20-339933?style=flat-square&logo=node.js&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express"/>
+
+<img src="https://img.shields.io/badge/TypeScript_Backend-3178C6?style=flat-square&logo=typescript"/>
+
+<img src="https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest"/>
+
+<img src="https://img.shields.io/badge/Supertest-Testing-success?style=flat-square"/>
+
+<img src="https://img.shields.io/badge/Netlify-Deployed-00C7B7?style=flat-square&logo=netlify"/>
+
+<img src="https://img.shields.io/badge/Railway-Deployed-7B3FE4?style=flat-square&logo=railway"/>
+
+<img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square"/>
+
+</p>
+
+---
+
+### 🌐 Live Application
+
+**Frontend**  
+https://page-pulse-analyzer.netlify.app/
+
+**Backend API**  
+https://page-pulse-api-production.up.railway.app/
+
+---
+
+### ✨ Key Highlights
+
+⚡ Real-Time Website Auditing
+
+📊 Interactive Analytics Dashboard
+
+🚀 Production-Ready Express Backend
+
+⚙ Intelligent Response Caching
+
+🔄 FIFO Concurrency Queue
+
+🛡 Rate Limiting & Security Middleware
+
+📈 Response Time Analytics
+
+🧪 Automated Testing (Jest + Supertest)
+
+🚀 CI/CD with GitHub Actions
+
+🌙 Dark Mode & Responsive UI
+
+---
 
 </div>
 
-## 🚀 Live Demo
 
-- **Frontend:** https://page-pulse-analyzer.netlify.app/
-- **Backend API:** https://page-pulse-api-production.up.railway.app/
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [🛠 Tech Stack](#-tech-stack)
+- [🏗 System Architecture](#-system-architecture)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🔑 Environment Variables](#-environment-variables)
+- [📡 API Documentation](#-api-documentation)
+- [🧪 Testing](#-testing)
+- [🚀 Deployment](#-deployment)
+- [🏛 System Design](#-system-design)
+- [🧩 Backend Architecture](#-backend-architecture)
+- [✅ Code Quality](#-code-quality)
+- [♿ Accessibility](#-accessibility)
+- [⚡ Performance Optimizations](#-performance-optimizations)
+- [🔒 Security](#-security)
+- [🚀 Future Improvements](#-future-improvements)
+- [🤖 AI Usage](#-ai-usage)
+- [📄 License](#-license)
+
+
+# ✨ Features
+
+| Category | Feature | Description |
+|-----------|----------|-------------|
+| 🌐 Core Audit | Website Analysis | Checks HTTP status, reachability, response time, page title, and cache status |
+| ✅ Validation | URL Validation | Client and server-side validation using Zod |
+| ⏱ Reliability | Request Timeout | Automatically aborts long-running requests after 5 seconds |
+| ⚡ Performance | Response Cache | Configurable in-memory cache with 10-minute TTL |
+| 🚦 Concurrency | Queue Management | Supports up to 10 simultaneous audits with FIFO scheduling |
+| 🛡 Security | Rate Limiting | Protects API against abuse with IP-based request limits |
+| 📋 Logging | Structured Logs | Winston logging with request IDs, timing, IP address, and status codes |
+| ❌ Error Handling | Unified API Responses | Standardized success/error response format |
+| 🕘 Dashboard | Recent History | Stores the latest audit history in memory and local storage |
+| 📥 Export | JSON Download | Download audit reports in JSON format |
+| 📋 Clipboard | Copy Results | Copy API response with a single click |
+| 🎨 UI | Loading Skeleton | Animated shimmer placeholders during audits |
+| 📊 Analytics | Charts | Response time trends and HTTP status distribution |
+| 🌙 UX | Dark Mode | System-aware theme with persistent preference |
+| ⌨ Productivity | Keyboard Shortcuts | Quick actions for search, theme toggle, rerun, and reset |
+| 📱 Responsive | Mobile Support | Optimized for desktop, tablet, and mobile devices |
+| 🔐 Security | Best Practices | Helmet, CORS allowlist, input sanitization, environment-based configuration |
 
 ---
 
-## Overview
+# 🛠 Tech Stack
 
-**Page Pulse** is a full-stack website audit platform built as a
-production-grade Software Development assessment. A React dashboard
-submits a URL to an Express API, which probes the target with a 5-second
-abort timeout, caches the result, bounds concurrency, rate-limits abuse,
-and returns a structured JSON envelope keyed by a request ID.
+## Frontend
 
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
+- React Hook Form
+- Axios
+- Zod
+- Recharts
+- Lucide Icons
+
+---
+
+## Backend
+
+- Node.js 20
+- Express.js
+- TypeScript
+- Winston
+- Helmet
+- CORS
+- Compression
+- express-rate-limit
+- node-cache
+- UUID
+- Zod
+
+---
+
+## Testing
+
+- Jest
+- Supertest
+
+---
+
+## DevOps
+
+- GitHub Actions
+- Netlify
+- Railway
+
+---
+
+# 🏗 System Architecture
+
+```text
+                    POST /api/audit
++----------------+ -----------------------> +----------------+
+|                |                          |                |
+|   React App    |                          | Express API    |
+|   (Netlify)    | <----------------------- |   (Railway)    |
+|                |      JSON Response       |                |
++----------------+                          +--------+-------+
+                                                     |
+                                                     |
+                                            fetch() with timeout
+                                                     |
+                                                     v
+                                            +----------------+
+                                            | Target Website |
+                                            +----------------+
+                                                     |
+                           +-------------------------+-------------------------+
+                           |                         |                         |
+                           v                         v                         v
+                     Response Cache          Audit Queue             History Store
 ```
-┌────────────┐     POST /api/audit      ┌─────────────┐     fetch(5s)    ┌──────────┐
-│  Frontend  │  ─────────────────────►  │   Backend   │  ─────────────►  │  Target  │
-│  (Netlify)  │  ◄──── 200 {data} ────   │  (Railway)   │  ◄── response ── │  Website │
-└────────────┘                          └─────────────┘                  └──────────┘
-                                              │
-                                   ┌──────────┼──────────┐
-                                   ▼          ▼          ▼
-                                Cache     Queue(10)   History(20)
-```
-
-If the backend is unreachable, the frontend gracefully degrades to a
-CORS-safe in-browser probe — so the dashboard is **never a dead end**.
 
 ---
 
-## Features
+# ⚙ Production Engineering
 
-| | Feature | Detail |
-| --- | --- | --- |
-| **Core** | URL audit | HTTP status, reachability, response time, page title, cache status |
-| | URL validation | zod schema on server + client; rejects invalid/internal URLs |
-| | 5s timeout | `AbortController` → 504 on hang |
-| | Concurrency limit | Max 10 parallel audits; FIFO queue for the rest |
-| | Caching | 10-min TTL (env-configurable); only reachable results cached |
-| | Rate limiting | 100 req / IP / hour with structured 429 |
-| | Structured logging | Winston; request ID, URL, status, duration, IP on every line |
-| | Centralized errors | `{success:false,error,requestId}` envelope everywhere |
-| **Dashboard** | Recent history | Last 20 audits in memory + client localStorage |
-| | Download report | One-click JSON download |
-| | Copy result | Copy JSON to clipboard |
-| | Loading skeleton | Shimmer effect while auditing |
-| | Empty state | Illustrated, with example URLs |
-| | Charts | Response-time trend + status distribution (Recharts) |
-| | Dark mode | Dark-first, toggle persists, system-aware |
-| | Keyboard shortcuts | `⌘K` focus · `⌘J` theme · `⌘/` re-run · `Esc` clear |
-| | 404 page | Animated not-found route |
-| | Animated background | Aurora blobs + grid (reduced-motion aware) |
-| | Responsive | Desktop / tablet / mobile |
-| **Security** | Helmet · CORS allowlist · input sanitization · rate limiting · env-based secrets |
+The project follows production-oriented backend architecture and engineering practices instead of being a simple CRUD application.
+
+### Backend Capabilities
+
+- Configurable caching layer
+- FIFO concurrency queue
+- Request timeout handling
+- Centralized error handling
+- Structured request logging
+- Request ID tracing
+- Environment-based configuration
+- Graceful fallback support
+- Health monitoring endpoint
+- Rate limiting
+- Security middleware
+- Automated testing
+- CI/CD pipeline
 
 ---
 
-## Tech stack
+# 📁 Project Structure
 
-**Frontend:** React 18, Vite, TypeScript, TailwindCSS, shadcn/ui, Framer
-Motion, React Hook Form, Zod, Axios, Recharts, Lucide icons.
-
-> **Note on React version:** the project targets React 18.3 (the stable
-> line shadcn/ui ships against). React 19 was requested; shadcn/ui's
-> Radix primitives do not yet formally support 19, so 18.3 was chosen for
-> production correctness. Upgrading is a one-line bump once Radix lands
-> 19 support.
-
-**Backend:** Node.js 20, Express, TypeScript, Winston, express-rate-limit,
-node-cache, uuid, zod, Helmet, CORS, compression.
-
-**Testing:** Jest + Supertest (21 tests across service + API layers).
-
-**CI/CD:** GitHub Actions (backend + frontend jobs).
-
-**Deployment:** Netlify (frontend) · Railway (backend).
-
----
-
-## Project structure
-
-```
+```text
 page-pulse/
-├── docs/                      # System design documents (interview-grade)
-│   ├── ARCHITECTURE.md
-│   ├── TECHNOLOGY_DECISIONS.md
-│   ├── FAILURE_MODES.md
-│   ├── SCALABILITY.md
-│   ├── CACHING.md
-│   ├── MONITORING.md
-│   ├── ROLLBACK.md
-│   ├── CONCURRENCY_AND_QUEUE.md
-│   └── DEPLOYMENT.md
-├── .github/workflows/ci.yml   # Lint · test · build (backend + frontend)
-├── server/                    # Express + TypeScript backend
-│   ├── src/
-│   │   ├── config/            # Validated env config
-│   │   ├── controllers/       # Request handlers
-│   │   ├── middlewares/       # requestId, validation, rateLimit, error
-│   │   ├── routes/            # /api router factory
-│   │   ├── services/          # audit, cache, queue, history
-│   │   ├── utils/             # logger, errors, validation, request-id
-│   │   ├── tests/             # Jest + Supertest
-│   │   ├── app.ts             # Express app factory
-│   │   └── index.ts           # Server entrypoint
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── jest.config.js
-├── src/                       # React + Vite frontend
-│   ├── components/
-│   │   ├── audit/             # Hero, form, result, skeleton, history, charts
-│   │   ├── layout/            # Header, Footer, AnimatedBackground, ToastViewport
-│   │   └── ui/                # shadcn/ui primitives
-│   ├── hooks/                 # useAudit, useTheme, useHistory, useToasts, shortcuts
-│   ├── pages/                 # LandingPage, NotFoundPage
-│   ├── services/              # audit (backend + fallback)
-│   ├── types/                 # Shared domain types
-│   ├── utils/                 # audit helpers, url validation, config
-│   ├── App.tsx                # Routing + layout + error boundary
-│   └── main.tsx
-├── index.html
+│
+├── docs/                  # System Design Documents
+├── .github/workflows/     # CI/CD Pipeline
+├── server/                # Express Backend
+├── src/                   # React Frontend
+├── public/
 ├── AI_USAGE.md
 └── README.md
 ```
 
+# 🚀 Getting Started
+
+Follow the steps below to run Page Pulse locally.
+
 ---
 
-## Installation
+## 📋 Prerequisites
 
-### Prerequisites
+Before starting, ensure you have:
 
-- Node.js 20+
-- npm 10+
+- Node.js **20+**
+- npm **10+**
+- Git
 
-### Backend
+Verify your installation:
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+# 📥 Clone the Repository
+
+```bash
+git clone https://github.com/bhavya27092027/page-pulse.git
+
+cd page-pulse
+```
+
+---
+
+# ⚙ Backend Setup
+
+Navigate to the backend directory.
 
 ```bash
 cd server
-cp .env.example .env        # adjust if needed
-npm install
-npm run dev                 # http://localhost:4000
 ```
 
-### Frontend
+Install dependencies.
 
 ```bash
-# from the repo root
 npm install
-VITE_API_URL=http://localhost:4000 npm run dev   # http://localhost:5173
 ```
 
-If `VITE_API_URL` is unset, the frontend uses its in-browser fallback
-engine (no backend required) — handy for quick previews.
+Create a local environment file.
+
+```bash
+cp .env.example .env
+```
+
+Start the backend server.
+
+```bash
+npm run dev
+```
+
+Backend will be available at:
+
+```
+http://localhost:4000
+```
 
 ---
 
-## Environment variables
+# 💻 Frontend Setup
 
-### Backend (`server/.env`)
+Return to the project root.
 
-| Var | Default | Purpose |
-| --- | --- | --- |
-| `PORT` | `4000` | Listen port |
-| `NODE_ENV` | `development` | Runtime mode |
-| `CORS_ORIGIN` | `*` | Comma-separated allowed origins |
-| `AUDIT_TIMEOUT_MS` | `5000` | Per-probe abort timeout |
-| `MAX_CONCURRENT_AUDITS` | `10` | Concurrency cap |
-| `CACHE_TTL_SECONDS` | `600` | Result cache TTL (10 min) |
-| `HISTORY_LIMIT` | `20` | In-memory history size |
-| `RATE_LIMIT_WINDOW_MS` | `3600000` | Rate-limit window (1 h) |
-| `RATE_LIMIT_MAX` | `100` | Max requests per window per IP |
+```bash
+cd ..
+```
 
-### Frontend
+Install frontend dependencies.
 
-| Var | Default | Purpose |
-| --- | --- | --- |
-| `VITE_API_URL` | _(empty)_ | Backend base URL. Empty = use fallback engine. |
+```bash
+npm install
+```
 
-**No secrets are committed.** All sensitive values come from the
-environment.
+Create a `.env` file in the project root.
+
+```env
+VITE_API_URL=http://localhost:4000
+```
+
+Run the development server.
+
+```bash
+npm run dev
+```
+
+Frontend runs at:
+
+```
+http://localhost:5173
+```
 
 ---
 
-## API documentation
+# 🔑 Environment Variables
 
-### `POST /api/audit`
+## Backend (`server/.env`)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| PORT | 4000 | Server listening port |
+| NODE_ENV | development | Runtime environment |
+| CORS_ORIGIN | * | Allowed frontend origins |
+| AUDIT_TIMEOUT_MS | 5000 | Maximum request timeout |
+| MAX_CONCURRENT_AUDITS | 10 | Concurrent audit limit |
+| CACHE_TTL_SECONDS | 600 | Cache duration |
+| HISTORY_LIMIT | 20 | Number of recent audits stored |
+| RATE_LIMIT_WINDOW_MS | 3600000 | Rate limit window |
+| RATE_LIMIT_MAX | 100 | Maximum requests per IP |
+
+Example:
+
+```env
+PORT=4000
+NODE_ENV=development
+CORS_ORIGIN=http://localhost:5173
+AUDIT_TIMEOUT_MS=5000
+MAX_CONCURRENT_AUDITS=10
+CACHE_TTL_SECONDS=600
+HISTORY_LIMIT=20
+RATE_LIMIT_WINDOW_MS=3600000
+RATE_LIMIT_MAX=100
+```
+
+---
+
+## Frontend (`.env`)
+
+| Variable | Example | Description |
+|----------|---------|-------------|
+| VITE_API_URL | http://localhost:4000 | Backend API Base URL |
+
+Example:
+
+```env
+VITE_API_URL=http://localhost:4000
+```
+
+### Production
+
+```env
+VITE_API_URL=https://page-pulse-api-production.up.railway.app
+```
+
+> No secrets are committed to the repository. All runtime configuration is provided through environment variables.
+
+---
+
+# 📡 API Documentation
+
+## Base URL
+
+### Local
+
+```
+http://localhost:4000
+```
+
+### Production
+
+```
+https://page-pulse-api-production.up.railway.app
+```
+
+---
+
+## POST `/api/audit`
 
 Audit a website.
 
-**Request**
-```json
-{ "url": "https://openai.com" }
+### Request
+
+```http
+POST /api/audit
+Content-Type: application/json
 ```
 
-**200 — success**
+```json
+{
+  "url": "https://openai.com"
+}
+```
+
+---
+
+### Success Response
+
 ```json
 {
   "success": true,
@@ -217,157 +451,351 @@ Audit a website.
     "responseTime": 182,
     "title": "OpenAI",
     "cached": false,
-    "timestamp": "2026-07-25T03:10:32.000Z",
-    "requestId": "2d7331bb-a74c-44c0-860b-c98d7bb01313"
+    "timestamp": "...",
+    "requestId": "..."
   },
-  "requestId": "2d7331bb-a74c-44c0-860b-c98d7bb01313"
+  "requestId": "..."
 }
 ```
 
-**Errors** (all share the envelope)
-| Status | Cause |
-| --- | --- |
-| 400 | Invalid / missing URL |
-| 404 | Unknown route |
-| 429 | Rate limit exceeded |
-| 504 | Audit timeout (> 5s) |
-| 500 | Internal error |
-| 200 w/ `reachable:false` | Target site down (not an API error) |
+---
 
-```json
-{ "success": false, "error": "…", "requestId": "…" }
-```
+### Error Responses
 
-### `GET /api/health`
-Liveness probe. → `{ success, data: { status:"ok", uptime, timestamp } }`
-
-### `GET /api/history`
-Recent audits (last 20). → `{ success, data: AuditResult[] }`
+| Status | Description |
+|---------|-------------|
+| 400 | Invalid or missing URL |
+| 404 | Route not found |
+| 429 | Too many requests |
+| 500 | Internal server error |
+| 504 | Request timeout |
+| 200 | Target unreachable (`reachable: false`) |
 
 ---
 
-## Testing
+## GET `/api/health`
+
+Returns server health information.
+
+```json
+{
+  "success": true,
+  "data": {
+    "status": "ok",
+    "uptime": "...",
+    "timestamp": "..."
+  }
+}
+```
+
+---
+
+## GET `/api/history`
+
+Returns the latest audit history.
+
+```json
+{
+  "success": true,
+  "data": [
+    ...
+  ]
+}
+```
+
+---
+
+# 🧪 Testing
+
+Backend tests are powered by **Jest** and **Supertest**.
+
+Run all tests.
 
 ```bash
 cd server
-npm test            # Jest + Supertest, with coverage
+
+npm test
 ```
 
-21 tests across two suites:
+The test suite covers:
 
-- **`audit.service.test.ts`** — success, title extraction, 4xx/5xx,
-  network failure, timeout, caching, history writes.
-- **`api.test.ts`** — valid URL, scheme normalization, validation
-  failures (4 cases), cache hit, timeout → 504, network failure →
-  reachable:false, rate limiting → 429, health, history, 404 envelope.
-
----
-
-## Deployment
-
-### Frontend → Netlify
-
-1. Import the repository into Netlify.
-2. Set the build configuration:
-
-   ```text
-   Build command: npm run build
-   Publish directory: dist
-   ```
-
-3. Add the environment variable:
-
-   ```text
-   VITE_API_URL=https://page-pulse-api-production.up.railway.app
-   ```
-
-4. Deploy the site. If using React Router, configure a SPA redirect using `netlify.toml` (or Netlify's redirect settings).
-
-### Backend → Railway
-
-1. Create a new project in Railway and connect your GitHub repository.
-2. Set the **Root Directory** to:
-
-   ```text
-   server
-   ```
-
-3. Railway will build and deploy the backend automatically.
-4. Set the following environment variables:
-
-   ```text
-   NODE_ENV=production
-   CORS_ORIGIN=https://page-pulse-analyzer.netlify.app
-   ```
-
-5. Verify the deployment using:
-
-   ```text
-   https://page-pulse-api-production.up.railway.app/api/health
-   ```
-
-See [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) for the full deployment guide.
+- API validation
+- Success responses
+- Error handling
+- Timeout handling
+- Cache behavior
+- Rate limiting
+- Health endpoint
+- History endpoint
+- Network failures
+- Request validation
 
 ---
 
-## System design
+# 🚀 Deployment
 
-The `docs/` folder contains interview-grade system design:
+## Frontend (Netlify)
 
-- [Architecture diagram](./docs/ARCHITECTURE.md) (Mermaid)
-- [Technology decision record](./docs/TECHNOLOGY_DECISIONS.md)
-- [Failure mode analysis](./docs/FAILURE_MODES.md)
-- [Scalability plan](./docs/SCALABILITY.md)
-- [Caching strategy](./docs/CACHING.md)
-- [Monitoring strategy](./docs/MONITORING.md)
-- [Rollback strategy](./docs/ROLLBACK.md)
-- [Concurrency & queue design](./docs/CONCURRENCY_AND_QUEUE.md)
-- [Production deployment guide](./docs/DEPLOYMENT.md)
+Build command
 
----
+```bash
+npm run build
+```
 
-## Code quality
+Publish directory
 
-- **SOLID / single-responsibility:** controllers shape requests, services
-  own business logic, middlewares cross-cut.
-- **Reusable components:** shadcn/ui primitives + composable audit cards.
-- **Shared contract:** the API envelope + `AuditResult` shape are mirrored
-  client/server.
-- **Error boundaries:** a top-level React boundary + the central Express
-  handler mean no unhandled error blanks the app.
-- **No duplicate logic:** URL validation uses one zod schema (server) and a
-  mirrored helper (client); fetch-mock helpers are shared across tests.
-- **Type safety:** strict TypeScript end-to-end.
+```
+dist
+```
+
+Production Environment Variable
+
+```env
+VITE_API_URL=https://page-pulse-api-production.up.railway.app
+```
+
+Deploy directly from GitHub using Netlify.
 
 ---
 
-## Accessibility & performance
+## Backend (Railway)
 
-- Reduced-motion media query disables animations.
-- Keyboard shortcuts with `allowInInput` guards.
-- ARIA labels on icon-only buttons; focus-visible rings.
-- Bundle code-splitting (react-vendor / charts / motion / forms).
-- Memoized background; lazy chart rendering when history is empty.
+Root Directory
+
+```
+server
+```
+
+Production Environment
+
+```env
+NODE_ENV=production
+
+CORS_ORIGIN=https://page-pulse-analyzer.netlify.app
+```
+
+Health Check
+
+```
+https://page-pulse-api-production.up.railway.app/api/health
+```
+
+Railway automatically builds and deploys the backend after every push to the main branch.
+
+# 🏛 System Design
+
+The `docs/` directory contains detailed engineering documentation that explains the architectural decisions and production considerations behind the project.
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| `ARCHITECTURE.md` | Overall system architecture and request flow |
+| `TECHNOLOGY_DECISIONS.md` | Technology choices and trade-offs |
+| `FAILURE_MODES.md` | Failure scenarios and recovery strategies |
+| `SCALABILITY.md` | Scaling considerations for high traffic |
+| `CACHING.md` | Cache implementation and eviction strategy |
+| `MONITORING.md` | Logging, monitoring, and observability |
+| `ROLLBACK.md` | Safe deployment rollback process |
+| `CONCURRENCY_AND_QUEUE.md` | Queue implementation and concurrency handling |
+| `DEPLOYMENT.md` | Complete production deployment guide |
 
 ---
 
-## Future improvements
+# 🧩 Backend Architecture
 
-- Redis-backed cache + rate-limit store for horizontal scale.
-- Persistent audit history (Postgres via Supabase).
-- Background worker queue (BullMQ) with `202 + jobId` for very high throughput.
-- Prometheus metrics + Grafana dashboards.
-- SSRF egress filter (deny RFC1918 / link-local destinations).
-- Optional auth + per-user audit history.
-- WebSocket/SSE live updates for queued audits.
+The backend follows a layered architecture to improve maintainability, scalability, and testability.
+
+```text
+Client
+   │
+   ▼
+Routes
+   │
+Controllers
+   │
+Services
+   │
+Utilities
+   │
+External Website
+```
+
+Responsibilities are clearly separated:
+
+- **Routes** define API endpoints.
+- **Controllers** handle requests and responses.
+- **Services** implement business logic.
+- **Utilities** provide shared helpers.
+- **Middlewares** manage validation, logging, request IDs, rate limiting, and centralized error handling.
 
 ---
 
-## AI usage
+# ✅ Code Quality
 
-See [`AI_USAGE.md`](./AI_USAGE.md) — AI was used for scaffolding,
-architecture brainstorming, and documentation; implementation,
-refinement, testing, debugging, and design decisions were reviewed and
-customized by the developer.
+The project emphasizes clean architecture and production-grade engineering practices.
+
+### Design Principles
+
+- Separation of concerns
+- Modular folder structure
+- Strict TypeScript
+- Reusable UI components
+- Shared API contract
+- Environment-based configuration
+- Centralized error handling
+- Consistent response structure
 
 ---
+
+### Backend Practices
+
+- Request validation using Zod
+- Structured Winston logging
+- Request ID tracing
+- Graceful timeout handling
+- Response caching
+- FIFO audit queue
+- Security middleware
+- Rate limiting
+- Health monitoring endpoint
+
+---
+
+### Frontend Practices
+
+- Component-driven architecture
+- Custom React Hooks
+- Responsive layouts
+- Error boundaries
+- Local storage persistence
+- Theme persistence
+- Lazy rendering
+- Type-safe API communication
+
+---
+
+# ♿ Accessibility
+
+Accessibility was considered throughout the application.
+
+Implemented features include:
+
+- Keyboard navigation
+- Focus-visible states
+- ARIA labels
+- Responsive layouts
+- Reduced motion support
+- Accessible icon buttons
+- System-aware dark mode
+
+---
+
+# ⚡ Performance Optimizations
+
+The application includes several optimizations for responsiveness and scalability.
+
+- Request caching
+- Configurable concurrency limits
+- Lazy rendering
+- Memoized background effects
+- Code splitting
+- Optimized bundle loading
+- Configurable timeout handling
+- Persistent frontend history
+
+---
+
+# 🔒 Security
+
+Production security measures include:
+
+- Helmet security headers
+- CORS allowlist
+- Input validation
+- Environment variables
+- Rate limiting
+- Request sanitization
+- Centralized error handling
+
+---
+
+# 🧪 Testing Strategy
+
+Testing focuses on both API correctness and service reliability.
+
+Covered areas include:
+
+- Successful audit requests
+- URL validation
+- Timeout scenarios
+- Cache behavior
+- Network failures
+- Rate limiting
+- Health endpoint
+- History endpoint
+- Error responses
+
+---
+
+# 🚀 Future Improvements
+
+Potential enhancements include:
+
+- Redis-backed distributed cache
+- PostgreSQL audit history
+- BullMQ background workers
+- Prometheus metrics
+- Grafana dashboards
+- Server-Sent Events (SSE)
+- WebSocket live updates
+- User authentication
+- Per-user audit history
+- SSRF protection
+- Multi-region deployment
+
+---
+
+# 🤖 AI Usage
+
+AI assisted with:
+
+- Initial project scaffolding
+- Documentation drafting
+- Architecture brainstorming
+
+All implementation, debugging, testing, optimization, production configuration, UI refinement, deployment, and engineering decisions were reviewed, customized, and finalized by the developer.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# 👨‍💻 Author
+
+**Bhavya Jain**
+
+B.Tech CSE (AI & ML)
+
+GitHub: https://github.com/bhavya27092027
+
+LinkedIn: https://www.linkedin.com/in/bhavya27092027/
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and supports future development.
+
+---
+
+<p align="center">
+
+Made with ❤️ using React, TypeScript, Express & Node.js
+
+</p>
